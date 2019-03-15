@@ -1,0 +1,6 @@
+/.idea/
+/.gradle/
+build/
+out/
+generated/
+/src/main/generated-resources/

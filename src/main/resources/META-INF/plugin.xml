@@ -1,0 +1,49 @@
+<idea-plugin url="https://github.com/kornilova-l/FlameViewer">
+    <id>com.github.kornilovaL.flamegraphProfiler</id>
+    <name>FlameViewer</name>
+    <version>0.8.2-SNAPSHOT</version>
+
+    <vendor url="https://github.com/kornilova-l" email="kornilova203@gmail.com"/>
+
+    <description><![CDATA[Instrumentation Java Profiler Fierix<br>
+
+    ]]></description>
+
+    <idea-version since-build="171"/>
+
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <executor implementation="com.github.korniloval.fierix.execution.ProfilerExecutor"/>
+        <programRunner implementation="com.github.korniloval.fierix.execution.ProfilerProgramRunner"/>
+    </extensions>
+
+    <actions>
+            <action class="com.github.korniloval.fierix.ui.config.ShowProfilerDialogAction"
+                    id="fierix.EditConfiguration" text="Edit Fierix Configuration..." icon="ProfilerIcons.flameIcon">
+                <add-to-group group-id="ToolsMenu" anchor="last"/>
+            </action>
+        <group>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <action id="fierix.AddMethodToConfigAction"
+                    class="com.github.korniloval.fierix.ui.line.markers.actions.AddMethodToConfigAction"
+                    text="Add method to Profiler Config"/>
+            <action id="fierix.RemoveMethodToConfigAction"
+                    class="com.github.korniloval.fierix.ui.line.markers.actions.RemoveMethodFromConfigAction"
+                    text="Remove method from Profiler Config"/>
+        </group>
+    </actions>
+    <project-components>
+        <component>
+            <implementation-class>com.github.korniloval.fierix.configuration.ConfigStorage</implementation-class>
+        </component>
+        <component>
+            <implementation-class>com.github.korniloval.fierix.ui.line.markers.LineMarkerProjectComponent</implementation-class>
+        </component>
+        <component>
+            <implementation-class>com.github.korniloval.fierix.ui.line.markers.LineMarkersHolder</implementation-class>
+        </component>
+    </project-components>
+
+</idea-plugin>

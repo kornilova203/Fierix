@@ -1,0 +1,3 @@
+rootProject.name = 'Fierix'
+include 'protobuf', 'configuration', 'agent'
+include 'agent-test'

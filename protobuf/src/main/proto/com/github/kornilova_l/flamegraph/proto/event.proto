@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package com.github.kornilova_l.flamegraph.proto;
+
+option java_outer_classname = "EventProtos";
+
+message Event {
+    oneof type {
+        MethodEvent methodEvent = 1;
+        Map newClass = 2;
+        Map newThread = 3;
+    }
+
+    message MethodEvent {
+        int64 thread_id = 1;
+        int64 class_name_id = 2;
+        int64 start_time = 3;
+        int64 duration = 4;
+        string method_name = 5;
+        string desc = 6;
+        bool is_static = 7;
+        repeated Parameter parameters = 8;
+        oneof end {
+            Var return_value = 9;
+            Var.Object throwable = 10;
+        }
+    }
+
+    message Map {
+        int64 id = 1;
+        string name = 2;
+    }
+}
+
+message Parameter {
+    Var var = 1;
+    uint32 index = 2;
+}
+
+message Var {
+    oneof value {
+        sint32 I = 1; // int
+        sint64 J = 2; // long
+        bool Z = 3; // boolean
+        uint32 C = 4; // char
+        sint32 S = 5; // short
+        sint32 B = 6; // byte
+        float F = 7; // float
+        double D = 8; // double
+        Object object = 9; // object
+    }
+    uint32 index = 10;
+
+    message Object {
+        string type = 1;
+        string value = 2;
+    }
+}
